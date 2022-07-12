@@ -38,7 +38,7 @@ jobs:
 
     - name: Docker build and tag
       run: |
-        docker build --no-build-cache -t ${{ env.target-registry }}:latest .
+        docker build --no-cache -t ${{ env.target-registry }}:latest .
         docker tag ${{ env.target-registry }}:latest ${{ env.target-registry }}:${{ steps.get-version.outputs.VERSION }}
 
     - name: Docker push
