@@ -11,7 +11,7 @@ type HealthcheckRouter struct {
 }
 
 func (self *HealthcheckRouter) HealthcheckRegister(router *gin.RouterGroup) {
-	router.GET("/", self.getHealthCheck)
+	router.GET("", self.getHealthCheck)
 }
 
 func Router(db *gorm.DB) HealthcheckRouter {
