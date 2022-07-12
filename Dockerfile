@@ -13,4 +13,5 @@ COPY docker/healthcheck.sh /usr/healthcheck/healthcheck.sh
 RUN chmod 555 /usr/healthcheck/healthcheck.sh
 HEALTHCHECK --timeout=1s CMD sh /usr/healthcheck/healthcheck.sh
 
+USER nobody
 CMD ["./mcdc-ws"]
