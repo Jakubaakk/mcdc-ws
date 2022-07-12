@@ -10,5 +10,13 @@ services:
       MYSQL_PASSWORD: "${DB_PASSWORD}"
     volumes:
       - "mysql_data:/var/lib/mysql"
+  app:
+    depends_on:
+      - mysql
+    image: "ghcr.io/jakubaakk/mcdc-ws"
+    ports:
+      - "8888:8080"
+    volumes:
+      - "./config.json:/app/config.json"
 volumes:
   mysql_data:

@@ -10,8 +10,8 @@ import (
 )
 
 func (self *UsersRouter) UsersRegister(router *gin.RouterGroup) {
-	router.GET("/", self.getUsers)
-	router.POST("/", self.createUser)
+	router.GET("", self.getUsers)
+	router.POST("", self.createUser)
 	router.GET("/:id", self.getUserById)
 	router.PUT("/:id", self.updateUser)
 	router.GET("/byMinecraftNickname/:minecraftNickname", self.getUserByMinecraftNickname)

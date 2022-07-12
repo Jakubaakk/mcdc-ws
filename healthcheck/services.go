@@ -10,8 +10,8 @@ type HealthcheckService struct {
 }
 
 func (self *HealthcheckService) isApplicationHealthy() bool {
-	var user users.User
-	result := self.db.Model(&users.User{}).First(&user)
+	var count int64
+	result := self.db.Model(&users.User{}).Count(&count)
 	err := result.Error
 	if err != nil {
 		return false
