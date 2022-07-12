@@ -9,6 +9,7 @@ type User struct {
 	MinecraftNickname string    `gorm:"unique" json:"minecraftNickname"`
 	DiscordId         string    `gorm:"unique" json:"discordId"`
 	Verified          bool      `json:"verified"`
+	Subscribed        bool      `json:"subscribed"`
 }
 
 type Status struct {

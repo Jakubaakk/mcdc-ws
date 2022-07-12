@@ -1,0 +1,16 @@
+{
+  "database": {
+    "user": "mcdc",
+    "password": "mcdcpassword",
+    "host": "localhost",
+    "port": 3306,
+    "database": "mcdc"
+  },
+  "apiKeys": [
+    {
+      "key": "a813b330-01d4-11ed-bd64-04421a27d55a",
+      "name": "Local",
+      "enabled": true
+    }
+  ]
+}

@@ -180,7 +180,7 @@ func (self *Service) findUserById(userId uuid.UUID) (*User, error) {
 }
 func handleDuplicateError(err error) error {
 	msg := err.Error()
-	if strings.Contains(msg, "SQLSTATE 23505") {
+	if strings.Contains(msg, "Error 1062") {
 		if strings.Contains(msg, "minecraft_nickname") {
 			return MinecraftNicknameAlreadyExists
 		}
