@@ -31,7 +31,7 @@ func (self *Service) GetUserById(id uuid.UUID) (*User, error) {
 }
 
 func (self *Service) CreateUser(user *User) (*User, error) {
-	user.Id = uuid.NewV1()
+	user.Id = uuid.NewV4()
 	result := self.db.Model(&User{}).Create(user)
 	err := result.Error
 	if err != nil {
