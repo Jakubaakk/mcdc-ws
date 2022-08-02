@@ -44,7 +44,12 @@ func (self *UsersRouter) getUsers(ctx *gin.Context) {
 		return
 	}
 
-	ctx.IndentedJSON(http.StatusOK, users)
+	var usersJson = []*UserJson{}
+	for _, user := range users {
+		usersJson = append(usersJson, user.toUserJson())
+	}
+
+	ctx.IndentedJSON(http.StatusOK, usersJson)
 }
 
 func (self *UsersRouter) createUser(ctx *gin.Context) {
@@ -60,13 +65,13 @@ func (self *UsersRouter) createUser(ctx *gin.Context) {
 		return
 	}
 
-	createdUser, err := self.service.CreateUser(user)
+	createdUser, err := self.service.CreateUser(user.toUser())
 	if err != nil {
 		handleMcdcError(ctx, err)
 		return
 	}
 
-	ctx.IndentedJSON(http.StatusCreated, createdUser)
+	ctx.IndentedJSON(http.StatusCreated, createdUser.toUserJson())
 }
 
 func (self *UsersRouter) updateUser(ctx *gin.Context) {
@@ -82,12 +87,12 @@ func (self *UsersRouter) updateUser(ctx *gin.Context) {
 		return
 	}
 
-	updatedUser, err := self.service.UpdateUser(user)
+	updatedUser, err := self.service.UpdateUser(user.toUser())
 	if err != nil {
 		handleMcdcError(ctx, err)
 		return
 	}
-	ctx.IndentedJSON(http.StatusOK, updatedUser)
+	ctx.IndentedJSON(http.StatusOK, updatedUser.toUserJson())
 }
 
 func (self *UsersRouter) getUserById(ctx *gin.Context) {
@@ -109,7 +114,7 @@ func (self *UsersRouter) getUserById(ctx *gin.Context) {
 		return
 	}
 
-	ctx.IndentedJSON(http.StatusOK, user)
+	ctx.IndentedJSON(http.StatusOK, user.toUserJson())
 }
 
 func (self *UsersRouter) getUserByMinecraftNickname(ctx *gin.Context) {
@@ -126,7 +131,7 @@ func (self *UsersRouter) getUserByMinecraftNickname(ctx *gin.Context) {
 		return
 	}
 
-	ctx.IndentedJSON(http.StatusOK, user)
+	ctx.IndentedJSON(http.StatusOK, user.toUserJson())
 }
 
 func (self *UsersRouter) updateUserByNickname(ctx *gin.Context) {
@@ -143,13 +148,13 @@ func (self *UsersRouter) updateUserByNickname(ctx *gin.Context) {
 		return
 	}
 
-	updatedUser, err := self.service.UpdateUserByMinecraftNickname(nickname, user)
+	updatedUser, err := self.service.UpdateUserByMinecraftNickname(nickname, user.toUser())
 	if err != nil {
 		handleMcdcError(ctx, err)
 		return
 	}
 
-	ctx.IndentedJSON(http.StatusOK, updatedUser)
+	ctx.IndentedJSON(http.StatusOK, updatedUser.toUserJson())
 }
 
 func (self *UsersRouter) getUserByDiscordId(ctx *gin.Context) {
@@ -166,7 +171,7 @@ func (self *UsersRouter) getUserByDiscordId(ctx *gin.Context) {
 		return
 	}
 
-	ctx.IndentedJSON(http.StatusOK, user)
+	ctx.IndentedJSON(http.StatusOK, user.toUserJson())
 
 }
 
@@ -184,13 +189,13 @@ func (self *UsersRouter) updateUserByDiscordId(ctx *gin.Context) {
 		return
 	}
 
-	updatedUser, err := self.service.UpdateUserByDiscordId(discordId, user)
+	updatedUser, err := self.service.UpdateUserByDiscordId(discordId, user.toUser())
 	if err != nil {
 		handleMcdcError(ctx, err)
 		return
 	}
 
-	ctx.IndentedJSON(http.StatusOK, updatedUser)
+	ctx.IndentedJSON(http.StatusOK, updatedUser.toUserJson())
 
 }
 
@@ -215,7 +220,7 @@ func (self *UsersRouter) updateUserStatusByMinecraftNickname(ctx *gin.Context) {
 		return
 	}
 
-	ctx.IndentedJSON(http.StatusOK, updatedUser)
+	ctx.IndentedJSON(http.StatusOK, updatedUser.toUserJson())
 }
 
 func (self *UsersRouter) updateUserStatusByDiscordId(ctx *gin.Context) {
@@ -239,7 +244,7 @@ func (self *UsersRouter) updateUserStatusByDiscordId(ctx *gin.Context) {
 		return
 	}
 
-	ctx.IndentedJSON(http.StatusOK, updatedUser)
+	ctx.IndentedJSON(http.StatusOK, updatedUser.toUserJson())
 }
 
 func handleMcdcError(ctx *gin.Context, err error) {

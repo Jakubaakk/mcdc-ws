@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-func ValidateUserForCreation(ctx *gin.Context) (*User, error) {
+func ValidateUserForCreation(ctx *gin.Context) (*UserJson, error) {
 	user, err := getUserFromContext(ctx)
 	if err != nil {
 		return nil, err
@@ -24,7 +24,7 @@ func ValidateUserForCreation(ctx *gin.Context) (*User, error) {
 	return user, nil
 }
 
-func ValidateUserForUpdateById(ctx *gin.Context) (*User, error) {
+func ValidateUserForUpdateById(ctx *gin.Context) (*UserJson, error) {
 	user, err := ValidateUserForUpdate(ctx)
 	if err != nil {
 		return nil, err
@@ -42,7 +42,7 @@ func ValidateUserForUpdateById(ctx *gin.Context) (*User, error) {
 	return user, nil
 }
 
-func ValidateUserForUpdate(ctx *gin.Context) (*User, error) {
+func ValidateUserForUpdate(ctx *gin.Context) (*UserJson, error) {
 	user, err := getUserFromContext(ctx)
 	if err != nil {
 		return nil, err
@@ -56,8 +56,8 @@ func ValidateUserForUpdate(ctx *gin.Context) (*User, error) {
 	return user, nil
 }
 
-func getUserFromContext(ctx *gin.Context) (*User, error) {
-	var user User
+func getUserFromContext(ctx *gin.Context) (*UserJson, error) {
+	var user UserJson
 	err := ctx.ShouldBindJSON(&user)
 	if err != nil {
 		return nil, InvalidJsonError
